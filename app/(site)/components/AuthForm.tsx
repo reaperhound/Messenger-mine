@@ -4,6 +4,8 @@ import Button from "@/app/components/Button"
 import Input from "@/app/components/Input"
 import { useCallback, useState } from "react"
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import SocialButton from "./SocialButton";
+import { BsGoogle, BsGithub } from "react-icons/bs"
 
 export default function AuthForm () {
   type Variant = "LOGIN" | "REGISTER"
@@ -29,6 +31,16 @@ export default function AuthForm () {
     setIsLoading(true)
     console.log(data);
     reset();
+  }
+
+  const socialAuthHandler = (action: string) => {
+    if(action === "google") {
+
+    }
+
+    if(action === "github") {
+
+    }
   }
 
   return (
@@ -83,6 +95,37 @@ export default function AuthForm () {
             text={variant === "LOGIN" ? "Sign in" : "Register"}
           />
         </form>
+        <div className="mt-6">
+          <h3 className="flex flex-row before:content-[''] after:content-[''] before:flex-1 after:flex-1 before:border-b after:border-b before:border-gray-300 after-border-gray-300 after:m-auto before:m-auto">
+            or continue with
+          </h3>
+        </div>
+        <div className=" mt-6 flex gap-2" >
+          <SocialButton 
+            icon={BsGoogle}
+            onClick={() => socialAuthHandler("google")}
+          />
+          <SocialButton
+            icon={BsGithub}
+            onClick={() => socialAuthHandler("github")}
+          />
+        </div>
+        <div className="text-center mt-6">
+          <p>
+          {
+            variant === "LOGIN" ? "New to messenger ? " : "Already have an account ? "
+          }
+          {
+            variant === "LOGIN" 
+            ? <span 
+                className="underline text-gray-500 hover:text-gray-600 cursor-pointer"
+                onClick={toggleVariant}>Create an account</span>
+            : <span
+                className="underline text-gray-800 hover:text-gray-600 cursor-pointer"
+                onClick={toggleVariant}>Sign in</span>
+          }
+          </p>
+        </div>
       </div>
     </div>
   )
